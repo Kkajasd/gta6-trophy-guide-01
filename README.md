@@ -8,25 +8,35 @@ An offline guide and tracker for all 55 PlayStation 5 trophies of **Grand Theft 
 
 ## What it is
 
-- **Checklist** of all 55 official trophies (1 platinum, 2 gold, 6 silver, 46 bronze; 28 hidden), each with its official name, description and grade, plus a guide written in our own words and a cited source.
+- **Checklist** of all 55 official trophies (1 platinum, 2 gold, 6 silver, 46 bronze), each with its official name, description and grade, plus a guide written in our own words and a cited source.
 - **Progress saved in the browser** (localStorage), with export to `leonida-platinum-save.json` and import back.
-- **Filters** by kind (story, missable, collectibles, activities, online) and search by name or description.
-- **Spoiler setting** that hides story trophy names and descriptions until earned.
-- **Roadmap in 4 stages** to the platinum: story → activities and skills → collectibles and exploration → cleanup.
-- **Missables**: 4 trophies flagged from their official descriptions (Hot Together, Retail Therapy, Catch Me If You Can, Actions Speak Louder), with the rule used to flag them.
+- **Filters** by kind (story, missable, collectibles, activities) and by grade, plus search and an earned / not-earned filter.
+- **Spoiler setting** that hides the names, descriptions and guides of story trophies until they are earned.
+- **Roadmap to the platinum** in four stages, in order, with the missable trophies flagged in-flow.
+- **Missables view**: the four trophies that can be missed, with their guides and warnings, so they are done when the chance appears.
 
-## How to use it
+## How the guide is built
 
-Open `app/index.html` in a desktop browser. No network is needed — the app is fully static and offline. Tick a trophy when you earn it; your progress stays in the browser. Export a save file to back it up or move it to another machine.
+Every guide is written in our own words for this entry. Trophy names, descriptions and grades are the official PlayStation 5 list, as Exophase and PSNProfiles listed it before this guide was written (the two agree on every name, description and grade). Counts — 42 Shooting Range challenges, 14 Top Fun locations, 18 meditation spots, 52 areas, 9 gangs, 8 garage properties, 9 activity types — are from PSNProfiles. Each guide cites its source beside it. Where a detail could not be verified from the official list, the guide says so instead of inventing it. No Rockstar Games logo, artwork or game screenshots are used: the look is our own.
 
-## Sources
+## Run it
 
-The official trophy list (names, descriptions, grades) via Exophase; target counts via PSNProfiles. Every guide is written in our own words for this entry; where a method is not yet checked in the game, the guide says so plainly. No Rockstar logo, wordmark or artwork is used.
+The app is static files under `app/` — no build step. Serve it and open `app/index.html`:
 
-## Build
+```sh
+node serve.ts
+```
 
-`main.ts` (Node 22, standard library only) copies `app/` and `screenshots/` into the output directory and writes `dossier.json` with `buildDossier` from the kit's `vendor/makefun-frontend.ts`. It clears only the output directory's contents — never the directory itself, which in the grader is a bind-mount.
+Then open http://localhost:8080. It works with the network off: every file it loads is under `app/`.
 
-## License
+## Hand it in
 
-MIT — see [LICENSE](LICENSE).
+`main.ts` (Node 22) copies `app/` and `screenshots/` to `/output` and writes `/output/dossier.json` with the vendored make.fun library:
+
+```sh
+mkdir -p out && MAKEFUN_OUTPUT_DIR=out node main.ts
+```
+
+---
+
+<sub>Entered on [make.fun](https://make.fun/?ref=kaka-aja&utm_source=github&utm_medium=readme&utm_campaign=gta6-trophy-guide-01) · AI agents build software for cash rewards</sub>
