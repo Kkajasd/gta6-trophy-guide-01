@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
 <meta charset="utf-8">
@@ -7,70 +7,70 @@
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<header class="masthead">
-  <div class="masthead-title">
+<header class="topbar">
+  <div class="brand">
     <h1>Leonida Platinum</h1>
-    <p class="subtitle">Grand Theft Auto VI — trophy guide &amp; tracker for PlayStation 5. All 55 official trophies, offline, in your own words with cited sources.</p>
+    <p class="tagline">An offline guide and tracker for all 55 PlayStation 5 trophies of Grand Theft Auto VI.</p>
   </div>
-  <div class="progress-card" id="progress-card">
-    <div class="progress-count"><span id="earned-count">0</span><span class="progress-total"> / 55 earned</span></div>
-    <div class="progress-bar"><div class="progress-fill" id="progress-fill"></div></div>
-    <div class="grade-counts" id="grade-counts"></div>
+  <div class="progress" id="progressBox" aria-live="polite">
+    <div class="progress-count"><span id="earnedCount">0</span> / <span id="totalCount">55</span> earned</div>
+    <div class="progress-bar"><div class="progress-fill" id="progressFill" style="width: 0%"></div></div>
   </div>
 </header>
 
-<div class="toolbar">
-  <input id="search" type="search" placeholder="Search trophies by name or description…" aria-label="Search trophies">
-  <div class="filters" id="filters" role="group" aria-label="Filter by kind">
-    <button data-kind="all" class="chip active">All 55</button>
-    <button data-kind="story" class="chip">Story</button>
-    <button data-kind="missable" class="chip">Missable</button>
-    <button data-kind="collectibles" class="chip">Collectibles</button>
-    <button data-kind="activities" class="chip">Activities</button>
-    <button data-kind="online" class="chip">Online</button>
-  </div>
-  <label class="spoiler-toggle"><input id="spoiler" type="checkbox" checked> Hide story spoilers</label>
-  <div class="save-actions">
-    <button id="export-btn" type="button">Export save</button>
-    <button id="import-btn" type="button">Import save</button>
-    <input id="import-file" type="file" accept="application/json,.json" hidden>
-  </div>
-</div>
-
 <nav class="tabs" role="tablist" aria-label="Guide sections">
-  <button id="tab-checklist" class="tab active" role="tab" data-tab="checklist">Checklist</button>
-  <button id="tab-roadmap" class="tab" role="tab" data-tab="roadmap">Roadmap to Platinum</button>
-  <button id="tab-missables" class="tab" role="tab" data-tab="missables">Missables</button>
+  <button class="tab active" data-tab="checklist" role="tab" aria-selected="true">Checklist</button>
+  <button class="tab" data-tab="roadmap" role="tab" aria-selected="false">Roadmap</button>
+  <button class="tab" data-tab="missables" role="tab" aria-selected="false">Missables <span class="pill" id="missableCount">4</span></button>
 </nav>
 
-<main class="layout">
-  <section id="view-checklist" class="view">
-    <p class="view-note" id="list-note"></p>
-    <ul class="trophy-list" id="trophy-list"></ul>
+<main>
+  <section id="tab-checklist" class="panel active" role="tabpanel">
+    <div class="controls">
+      <label class="search">
+        <span class="visually-hidden">Search trophies</span>
+        <input type="search" id="searchBox" placeholder="Search by name or description…" autocomplete="off">
+      </label>
+      <div class="filters" id="kindFilters" role="group" aria-label="Filter by kind">
+        <button class="chip active" data-kind="all">All</button>
+        <button class="chip" data-kind="story">Story</button>
+        <button class="chip" data-kind="missable">Missable</button>
+        <button class="chip" data-kind="collectibles">Collectibles</button>
+        <button class="chip" data-kind="activities">Activities</button>
+        <button class="chip" data-kind="online">Online</button>
+      </div>
+      <label class="spoiler">
+        <input type="checkbox" id="spoilerToggle" checked>
+        <span>Hide story spoilers until earned</span>
+      </label>
+      <div class="save">
+        <button id="exportBtn" type="button">Export save</button>
+        <button id="importBtn" type="button">Import save</button>
+        <input type="file" id="importFile" accept=".json,application/json" class="visually-hidden">
+      </div>
+    </div>
+    <p class="hint">Tick a trophy when you earn it — your progress stays in this browser. Click a trophy to read its guide and sources.</p>
+    <ol class="trophy-list" id="trophyList"></ol>
+    <p class="empty" id="emptyNote" hidden>No trophy matches that search or filter.</p>
   </section>
 
-  <section id="view-roadmap" class="view hidden">
+  <section id="tab-roadmap" class="panel" role="tabpanel">
     <h2>Roadmap to the platinum</h2>
-    <p class="view-note">Built from the official descriptions: story first, then activities and skills, then collectibles and exploration, then cleanup. Earn the story trophies in chapter order; the missable ones are flagged on the Missables tab — get them before the story moves on.</p>
-    <div class="roadmap" id="roadmap"></div>
+    <p class="lede">Built from the official descriptions: the order to earn them in. Do the missables during the story — they are the only ones that can pass you by.</p>
+    <div class="stages" id="roadmapStages"></div>
   </section>
 
-  <section id="view-missables" class="view hidden">
+  <section id="tab-missables" class="panel" role="tabpanel">
     <h2>Missable trophies</h2>
-    <p class="view-note">These four are flagged missable from their official descriptions — each needs something that may not be available later (a story choice, or your partner). Flags are built from the descriptions, not yet verified in the game: earn them when the chance comes, before the final mission.</p>
-    <ul class="trophy-list" id="missable-list"></ul>
-    <p class="flag-rule"><strong>How a trophy gets flagged:</strong> a trophy is missable when its official description needs a one-time story choice, a partner who may not be around later, or a single moment at a single place. Everything else can be earned after the story, in free roam.</p>
+    <p class="lede">Four trophies can be missed, flagged from their official descriptions: each one asks for something done in a particular moment — with your partner, at a particular place, or by a choice. Play them before the story moves on; everything else can be cleaned up after the finale.</p>
+    <ol class="trophy-list" id="missableList"></ol>
   </section>
-
-  <aside class="detail" id="detail" aria-live="polite">
-    <p class="detail-empty">Select a trophy to see its guide and sources.</p>
-  </aside>
 </main>
 
 <footer>
-  <p>Sources: the official trophy list (names, descriptions, grades) via Exophase; PSN target counts via PSNProfiles. Every guide is written in our own words for this entry; where a method is not yet checked in the game, the guide says so plainly. No Rockstar logo or artwork. Works offline — no network requests.</p>
+  <p>Official trophy names, descriptions and grades as PlayStation publishes them, via Exophase; PSN target counts via PSNProfiles. Every guide is written in our own words for this entry and cites its sources. No Rockstar logo or artwork is used. Works fully offline.</p>
 </footer>
 
-<script src="app.js"></script>
+<script type="module" src="app.js"></script>
 </body>
 </html>
