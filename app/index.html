@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Leonida Platinum — GTA VI Trophy Guide &amp; Tracker</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="masthead">
+  <div class="masthead-inner">
+    <div>
+      <h1>Leonida Platinum</h1>
+      <p class="tagline">The GTA VI trophy guide &amp; tracker — all 55 PlayStation trophies, offline, in your browser.</p>
+    </div>
+    <div class="progress-card" id="progressCard">
+      <div class="big-count"><span id="earnedCount">0</span><span class="of"> / 55</span></div>
+      <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+      <div class="progress-line" id="progressLine">0% — nothing earned yet</div>
+      <div class="grade-counts" id="gradeCounts"></div>
+    </div>
+  </div>
+</header>
+
+<nav class="tabs" id="tabs">
+  <button data-view="checklist" class="active">Checklist</button>
+  <button data-view="roadmap">Roadmap</button>
+  <button data-view="missables">Missables</button>
+  <button data-view="about">About &amp; Sources</button>
+</nav>
+
+<div class="toolbar" id="toolbar">
+  <input id="searchBox" type="search" placeholder="Search a trophy…" aria-label="Search trophies">
+  <div class="kind-filters" id="kindFilters">
+    <button data-kind="all" class="active">All</button>
+    <button data-kind="story">Story</button>
+    <button data-kind="missable">Missable</button>
+    <button data-kind="collectibles">Collectibles</button>
+    <button data-kind="activities">Activities</button>
+    <button data-kind="online">Online</button>
+  </div>
+  <select id="gradeFilter" aria-label="Filter by grade">
+    <option value="all">Every grade</option>
+    <option value="platinum">Platinum</option>
+    <option value="gold">Gold</option>
+    <option value="silver">Silver</option>
+    <option value="bronze">Bronze</option>
+  </select>
+  <label class="check"><input type="checkbox" id="hideEarned"> Hide earned</label>
+  <label class="check"><input type="checkbox" id="spoilerToggle" checked> Spoilers off</label>
+  <button id="exportBtn">Export save</button>
+  <button id="importBtn">Import save</button>
+  <input id="importFile" type="file" accept="application/json" hidden>
+</div>
+
+<main class="layout">
+  <section class="list-pane" id="viewPane"></section>
+  <aside class="detail-pane" id="detailPane">
+    <p class="detail-empty">Pick a trophy from the list to see its guide and sources.</p>
+  </aside>
+</main>
+
+<footer class="foot">
+  <p>Works fully offline — no network requests. Your progress is saved in this browser only (localStorage) and never leaves your machine. Trophy names, descriptions and grades are the official PlayStation list as Exophase and PSNProfiles publish it; every guide is our own words and cites its sources.</p>
+</footer>
+<script src="app.js"></script>
+</body>
+</html>
